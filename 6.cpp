@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 using namespace std;
+
 struct node
 {
 	int data;
@@ -23,21 +24,27 @@ void create(queue *q)
 }
 
 //Проверка очереди на пустоту..
-bool check(queue *q)
+bool isempty(queue *q)
 {
 	if (q->first == q->last) return true;
 	else return false;
 }
 
-//Добавление элемента в очередь..
-void add(queue *q)
+//Добавление элемента в начало очереди..
+void addFirst(queue* q)
+{
+
+}
+
+//Добавление элемента в конец очереди..
+void addLast(queue *q)
 {
 	int value; 
 	cout << "Введите значение: ";
 	cin >> value;
 	q->last = q->last->next;
-	q->last->data = value;
 	q->last->next = NULL;
+	q->last->data = value;
 	q->size++;
 	cout << "Элемент добавлен.";
 }
@@ -53,13 +60,30 @@ void del(queue *q)
 	cout << "Элемент удален.";
 }
 
-//Вывод очереди..
-void show()
+//Вывод элементов очереди с начала..
+void printFirst(queue* q)
+{
+	if (isempty(q))
+	{
+		cout << "Очередь пуста!";
+		return;
+	}
+	node* p = q->first;
+	while (p)
+	{
+		cout << p->data;
+		p = p->next;
+	}
+	cout << endl;
+}
+
+//Вывод эдементов очереди с конца..
+void printLast()
 {
 
 }
 
-//Удаление очереди..
+//Очистка очереди..
 void clear()
 {
 
@@ -75,5 +99,34 @@ void ex()
 int main()
 {
 	setlocale(LC_ALL,"ru");
-	
+
+	queue* q;
+	create(queue * q);
+
+	int choice; cin >> choice;
+	while (true)
+	{
+		switch (choice)
+		{
+		case 1:
+			add(queue * q);
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		}
+		cout << "Выберите действие:" << endl
+			<< "1)Добавление элемента в очередь;" << endl
+			<< "2)Удаление элемента из очереди;" << endl
+			<< "3)Вывод элементов очереди с начала;" << endl
+			<< "4)Вывод элементов очереди с конца;" << endl
+			<< "5)Очистка очереди;" << endl
+			<< "6)Индивидуальное задание;" << endl
+			<< "7)Выход;" << endl;
+		cin >> choice;
+	}
+	return 0;
 }
