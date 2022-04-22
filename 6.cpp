@@ -2,34 +2,97 @@
 #include <queue>
 using namespace std;
 
-//Добавление элемента в начало очереди..
-void push_back()
-{
-
-}
 
 //Добавление элемента в конец очереди..
-void push_front()
+void push_back(queue <int> &q)
 {
+	int a; cin >> a;
+	q.push(a);
+}
 
+//Добавление элемента в начало очереди..
+void push_front(queue <int> &q)
+{
+	int size = q.size() + 1;
+	int* temp = new int [size];
+
+	int a; cin >> a;
+	temp += a;
+	while (!q.empty())
+	{
+		temp += q.front();
+		q.pop();
+	}
+	for (int i = 0; i < size + 1; i++)
+	{
+		q.push(temp[i]);
+	}
+	delete[] temp;
 }
 
 //Просмотр очереди с конца..
-void print_back()
+void print_back(queue <int> q)
 {
+	int size = q.size();
+	int* temp = new int[size];
 
+	for (int i = 0; i < size; i++)
+	{
+		temp[i] = q.front();
+		q.pop();
+		q.push(temp[i]);
+	}
+	for (int i = size - 1; i >= 0; i--)
+	{
+		cout << temp[i] << " ";
+	}
+	cout << endl;
+	delete[] temp;
 }
 
 //Просмотр очереди с начала..
-void print_front()
+void print_front(queue <int> q)
 {
+	int size = q.size();
+	int* temp = new int[size];
+
+	for (int i = 0; i < size; i++)
+	{
+		temp[i] = q.front();
+		q.pop();
+		q.push(temp[i]);
+	}
+	for (int i = 0; i < size; i++)
+	{
+		cout << temp[i] << " ";
+	}
+	cout << endl;
+	delete[] temp;
 
 }
 
 //Индивидуальное задание..
-void ex()
+void ex(queue <int> &q)
 {
+	int size = q.size();
+	int* temp = new int[size];
+	int front = q.front();
+	q.pop();
 
+	for (int i = 0; i < size - 1; i++)
+	{
+		temp[i] = q.front();
+		q.pop();
+	}
+	int last = temp[size - 2];
+	temp[size - 2] = front;
+	q.push(last);
+
+	for (int i = 0; i < size - 1; i++)
+	{
+		q.push(temp[i]);
+	}
+	delete[] temp;
 }
 
 
@@ -53,19 +116,19 @@ int main()
 		switch (choose)
 		{
 		case 1:
-			push_back();
+			push_back(q);
 			break;
 		case 2:
-			push_front();
+			push_front(q);
 			break;
 		case 3:
-			print_back();
+			print_back(q);
 			break;
 		case 4:
-			print_front();
+			print_front(q);
 			break;
 		case 5:
-			ex();
+			ex(q);
 			break;
 		case 6:
 			return 0;
